@@ -11,6 +11,7 @@ app.set('views', path.join(__dirname, 'views'));
 //regular middlewares
 app.use(express.json())
 app.use(bodyParser.json())
+//app.use(bodyParser.urlencoded());
 app.use(bodyParser.urlencoded ({extended:true}))
 
 //routes
@@ -22,7 +23,11 @@ app.get('/test',(req,res) =>{
     res.render('signup')
 })
 
-// app.get('/test2',(req,res)=>{
-//     res.render('login')
-// })
+//renders the login page
+app.get('/test2',(req,res)=>{
+    res.render('login')
+})
 module.exports = app
+
+
+

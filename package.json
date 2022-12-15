@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,8 @@
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "pbkdf2": "^3.1.2",
+    "to": "^0.2.9",
+    "update": "^0.7.4",
     "validator": "^13.7.0"
   }
 }

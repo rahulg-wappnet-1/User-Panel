@@ -6,7 +6,7 @@ const validator = require('validator')
 const crypto = require('crypto')
 
 //Schema for user
-//fields :- name , email , password (string types)
+//fields :- name , email , role ,password (string types)
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
         validate: [validator.isEmail, 'Please enter email in correct format'], 
         unique:true
     },
+    role:{
+        type:String,
+        require:[true,'Please enter the role'],
+    },
     password:{
         type:String,
         require:[true,'Please enter the password'],
@@ -26,17 +30,16 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-// userSchema.pre('save', async function(next){
-//     if(!this.isModified(this.password)){
-//         return next()
-//     }
-//     this.password = await bcrypt.hash(this.password,10);
-//     console.log(password);
-// })
+userSchema.pre('save', async function(next){
+    if(!this.isModified('password')){
+        return next()
+    }
+    this.password = await bcrypt.hash(this.password,10);
+})
 
-// userSchema.methods.isValidatedPassword = async function(userSentPassword){
-//     return await bcrypt.compare(userSentPassword,this.password)
-// }
+userSchema.methods.isValidatedPassword = async function(userSentPassword){
+    return await bcrypt.compare(userSentPassword,this.password)
+}
 
 
 //exporting the userSchema

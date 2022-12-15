@@ -3,10 +3,20 @@ const router = require('express').Router()
 const multer = require('multer')
 const upload = multer();
 
-const{signUp, logIn} = require('../controllers/userConntroller')
+const{signUp, logIn, getAllUsers,getUser} = require('../controllers/userConntroller')
 
 //user routers
-router.post('/signup',upload.none(),signUp)
-// router.post('/login',upload.none(),logIn)
+
+//route for sign up
+router.post('/signup',signUp)
+
+//route for login
+router.post('/login',logIn)
+
+//route to get all registered users
+router.get('/allusers',getAllUsers)
+
+//route to get particular user
+router.post('/user',getUser)
 
 module.exports = router
