@@ -12,12 +12,12 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <title>Post Form</title>
+    <title>Signup</title>
   </head>
   <body class="bg-dark text-white">
     <div class="container mt-4 col-4 col-offset-6">
         <h1 class="display-3">SIGNUP FORM</h1>
-        <form method="POST" action="/signup" >
+        <form method="POST" action="/signup" enctype="multipart/form-data" >
           <div class="mb-3">
             <label for="name" class="form-label">name </label>
             <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp">
@@ -27,15 +27,19 @@
             <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp">
           </div>
           <div class="mb-3">
-            <label for="role" class="form-label">role </label>
-            <input type="text" name="role" class="form-control" id="role" aria-describedby="emailHelp">
+            <label for="image" class="form-label">image </label>
+            <input type="file" name="image" class="form-control" id="image" aria-describedby="emailHelp">
           </div>
+
           <div class="mb-3">
             <label for="password" class="form-label">password</label>
             <input type="password" name="password" class="form-control" id="password" aria-describedby="emailHelp">
           </div>
-          <button type="submit" class="btn btn-primary">Signup</button>
+          <button type="submit" class="btn btn-primary" onclick="window.location='/userData';">Signup</button>          
         </form>
+        <br>
+        <br>
+        <button class="btn btn-primary" onclick="window.location='/test2';" value="click here" >Login</button>
       </div>
   </body>
 </html>

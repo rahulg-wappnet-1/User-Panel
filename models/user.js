@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt')
 const validator = require('validator')
 //const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 //Schema for user
 //fields :- name , email , role ,password (string types)
@@ -27,6 +29,24 @@ const userSchema = new mongoose.Schema({
         require:[true,'Please enter the password'],
         minlength:[8,'Password must be of 8 or more chars'],
         select :false
+    },
+    photo:{
+        id:{
+            type:String,
+            required:true
+        },
+        secure_url:{
+            type:String,
+            required:true
+        }
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now()
+    },
+   
+    task:{
+        type:String
     }
 })
 
@@ -40,6 +60,12 @@ userSchema.pre('save', async function(next){
 userSchema.methods.isValidatedPassword = async function(userSentPassword){
     return await bcrypt.compare(userSentPassword,this.password)
 }
+
+userSchema.methods.getJwtToken = function(){
+    return jwt.sign({id: this._id}, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRY
+    });
+};
 
 
 //exporting the userSchema
