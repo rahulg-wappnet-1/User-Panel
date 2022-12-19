@@ -50,6 +50,7 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+//using pre hook of mongoose
 userSchema.pre('save', async function(next){
     if(!this.isModified('password')){
         return next()
@@ -57,10 +58,12 @@ userSchema.pre('save', async function(next){
     this.password = await bcrypt.hash(this.password,10);
 })
 
+//checks weather the pass word is valid or not
 userSchema.methods.isValidatedPassword = async function(userSentPassword){
     return await bcrypt.compare(userSentPassword,this.password)
 }
 
+//returns the jwt token
 userSchema.methods.getJwtToken = function(){
     return jwt.sign({id: this._id}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRY

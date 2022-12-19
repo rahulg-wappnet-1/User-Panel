@@ -13,9 +13,10 @@
     crossorigin="anonymous"
   />
 </head>
-<body>
+<body class="bg-dark text-white">
     <h1>Set Role</h1>
-    <form method="POST" action="/assignrole" >
+    <div class="container mt-4 col-4 col-offset-6">
+      <form method="POST" action="/assignrole" >
         <div class="mb-3">
             <label for="email" class="form-label">email </label>
             <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -27,5 +28,7 @@
 
         <button type="submit" class="btn btn-primary">Set Role</button>
     </form>
+    </div>
+    
 </body>
 </html>

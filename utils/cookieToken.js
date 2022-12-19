@@ -10,10 +10,7 @@ const cookieToken = (user,res) =>{
     };
 
     user.password = undefined
-        return res.cookie("token",token,option)
-
-    
-   
+        return res.cookie("token",token,option)   
 }
 
 module.exports = cookieToken;

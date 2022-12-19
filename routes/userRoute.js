@@ -4,7 +4,7 @@ const {customRole,isLoggedIn} = require('../middlewares/user')
 const multer = require('multer')
 const upload = multer();
 
-const{signUp, logIn, getAllUsers,getUser,taskRender,createTask, deleteUser, assignRole, assignRoleRender, renderUserDelete,renderError} = require('../controllers/userConntroller')
+const{signUp, logIn, getAllUsers,getUser,taskRender,createTask, deleteUser, assignRole, assignRoleRender, renderUserDelete,renderError, logOut} = require('../controllers/userConntroller')
 
 //user routers
 
@@ -19,7 +19,8 @@ router.post('/login',logIn)
 router.post('/user',getUser)
 
 //routes to render views
-router.get('/task',taskRender)
+//router.get('/task',taskRender)
+router.route('/task').get(isLoggedIn,customRole('admin'),taskRender)
 router.get('/assignRole',assignRoleRender)
 router.get('/deleteUser',renderUserDelete)
 router.get('/error',renderError)
@@ -29,7 +30,7 @@ router.get('/error',renderError)
 router.route('/deleteuser').post(isLoggedIn,customRole('admin'),deleteUser)
 router.route('/assignrole').post(isLoggedIn,customRole('admin'),assignRole)
 router.route('/createtask').post(isLoggedIn,customRole('admin'),createTask)
-
+router.route('/logout').get(isLoggedIn,logOut)
 
 
 module.exports = router

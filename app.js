@@ -11,6 +11,7 @@ const morgan = require('morgan')
 app.set("view engine", "ejs")
 app.set('views', path.join(__dirname, '/views'));
 
+
 //regular middlewares
 app.use(express.json())
 app.use(bodyParser.json())
@@ -51,6 +52,8 @@ app.get('/userdata',(req,res) =>{
 app.get('/test2',(req,res)=>{
     res.render('login')
 })
+
+
 
 
 module.exports = app

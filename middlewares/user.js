@@ -6,12 +6,15 @@ const jwt = require('jsonwebtoken')
 exports.isLoggedIn = async(req,res,next) =>{
     const token = req.cookies.token
     if(!token){
-        res.send('Log in for access')
-    }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        // res.send('Log in for access')
+        res.render('error')
+    }else{
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
     req.user = await user.findById(decoded.id)
 
     next();
+    }
+    
 }
 
 //check the role of user
